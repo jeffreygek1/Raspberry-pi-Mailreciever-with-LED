@@ -23,6 +23,10 @@ def loop():
     print('%d messages in INBOX' % select_info['EXISTS'])
 
     folder_status = server.folder_status(MAILBOX, 'UNSEEN')
+
+    print
+    server.folder_status(SPAMBOX, 'ALL')
+
     countemails = int(folder_status['UNSEEN'])
 
     print
@@ -36,8 +40,6 @@ def loop():
         GPIO.output(RED_LED, True)
 
     time.sleep(MAIL_CHECK_FREQ)
-
-
 
 print
 'Press Ctrl-C to quit.'
