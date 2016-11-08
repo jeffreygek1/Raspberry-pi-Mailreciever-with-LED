@@ -9,7 +9,7 @@ import RPi.GPIO as GPIO
 
 DEBUG = True
 
-# Stuurt de GPIO voor de lampjes aan
+# Stuurt de GPIO voor de lampjes aan.
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(GREEN_LED, GPIO.OUT)
