@@ -15,7 +15,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(GREEN_LED, GPIO.OUT)
 GPIO.setup(RED_LED, GPIO.OUT)
 
-# Deze loop haalt om de zoveel tijd bij of er mailtjes binnen komen
+# Deze loop haalt om de zoveel tijd bij of er mailtjes binnen komen.
 def loop():
     server = IMAPClient(HOSTNAME, use_uid=True, ssl=True)
     server.login(USERNAME, PASSWORD)
