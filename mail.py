@@ -41,9 +41,9 @@ def loop():
             time.sleep(0.15)
             GPIO.output(GREEN_LED, False)
             time.sleep(0.15)
+            while pygame.mixer.music.get_busy() == True:
+                continue
         MAIL_CHECK_FREQ = 0
-        while pygame.mixer.music.get_busy() == True:
-            continue
     else:
         GPIO.output(GREEN_LED, False)
         GPIO.output(RED_LED, True)
