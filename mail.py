@@ -12,7 +12,7 @@ USERNAME = 'hogeschoolutrechtmail'
 PASSWORD = 'raspberry'
 MAILBOX = 'Inbox'
 
-NEWMAIL_OFFSET = 1  # my unread messages never goes to zero, yours might
+NEWMAIL_OFFSET = 0  # my unread messages never goes to zero, yours might
 MAIL_CHECK_FREQ = 15  # check mail every 60 seconds
 
 GPIO.setwarnings(False)
