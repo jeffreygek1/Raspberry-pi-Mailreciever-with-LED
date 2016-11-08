@@ -40,8 +40,12 @@ def loop():
         "You have", newmails, "new emails!"
 
     if newmails > NEWMAIL_OFFSET:
-        GPIO.output(GREEN_LED, True)
         GPIO.output(RED_LED, False)
+        while True:
+            GPIO.output(GREEN_LED, True)
+            time.sleep(0.2)
+            GPIO.output(GREEN_LED, False)
+            time.sleep(0.2)
     else:
         GPIO.output(GREEN_LED, False)
         GPIO.output(RED_LED, True)
