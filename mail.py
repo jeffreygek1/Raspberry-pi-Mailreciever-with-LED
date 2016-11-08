@@ -37,10 +37,9 @@ def loop():
         pygame.mixer.init()
         pygame.mixer.music.load("sounds/victory-sound.mp3")
         pygame.mixer.music.play()
-
-        MAIL_CHECK_FREQ = 0
         while pygame.mixer.music.get_busy() == True:
             continue
+
     else:
         GPIO.output(GREEN_LED, False)
         GPIO.output(RED_LED, True)
