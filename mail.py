@@ -39,16 +39,16 @@ def loop():
 
     if countemails > NEWMAIL_OFFSET:
         GPIO.output(RED_LED, False)
-        if played == 0:
-            pygame.mixer.init()
-            pygame.mixer.music.load("sounds/victory-sound.mp3")
-            pygame.mixer.music.play()
-            isplayed()
         for i in range(0 , 101):
             GPIO.output(GREEN_LED, True)
             time.sleep(0.15)
             GPIO.output(GREEN_LED, False)
             time.sleep(0.15)
+            if played == 0:
+                pygame.mixer.init()
+                pygame.mixer.music.load("sounds/victory-sound.mp3")
+                pygame.mixer.music.play()
+                isplayed()
             while pygame.mixer.music.get_busy() == True:
                 continue
         MAIL_CHECK_FREQ = 0
