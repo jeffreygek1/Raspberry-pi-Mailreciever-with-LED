@@ -32,11 +32,16 @@ def loop():
     "You have", countemails, "new emails!"
 
     if countemails > NEWMAIL_OFFSET:
-        GPIO.output(GREEN_LED, True)
         GPIO.output(RED_LED, False)
         pygame.mixer.init()
         pygame.mixer.music.load("sounds/victory-sound.mp3")
         pygame.mixer.music.play()
+        for i in range(0 , 101):
+            GPIO.output(GREEN_LED, True)
+            time.sleep(0.15)
+            GPIO.output(GREEN_LED, False)
+            time.sleep(0.15)
+        MAIL_CHECK_FREQ = 0
         while pygame.mixer.music.get_busy() == True:
             continue
     else:
@@ -45,11 +50,11 @@ def loop():
 
     time.sleep(MAIL_CHECK_FREQ)
 
-print
-'Press Ctrl-C to quit.'
+try:
+    print
+    'Press Ctrl-C to quit.'
+    while True:
+        loop()
 
-# roept de main loop aan van de applicatie
-while True:
-    loop()
-
-GPIO.cleanup()
+finally:
+    GPIO.cleanup()

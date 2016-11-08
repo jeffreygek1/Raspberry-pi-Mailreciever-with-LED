@@ -35,7 +35,6 @@ def loop():
             time.sleep(0.15)
             GPIO.output(GREEN_LED, False)
             time.sleep(0.15)
-            print(i)
         MAIL_CHECK_FREQ = 0
 
     else:
