@@ -8,12 +8,12 @@ import RPi.GPIO as GPIO
 DEBUG = True
 
 HOSTNAME = 'imap.gmail.com'
-USERNAME = 'your username here'
-PASSWORD = 'your password here'
+USERNAME = 'hogeschoolutrechtmail'
+PASSWORD = 'raspberry'
 MAILBOX = 'Inbox'
 
 NEWMAIL_OFFSET = 1  # my unread messages never goes to zero, yours might
-MAIL_CHECK_FREQ = 60  # check mail every 60 seconds
+MAIL_CHECK_FREQ = 15  # check mail every 60 seconds
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
