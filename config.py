@@ -1,5 +1,5 @@
 HOSTNAME = 'imap.gmail.com'
-USERNAME = 'hogeschoolultrechtmail'
+USERNAME = 'hogeschoolutrechtmail'
 PASSWORD = 'raspberry'
 MAILBOX = 'Inbox'
 
