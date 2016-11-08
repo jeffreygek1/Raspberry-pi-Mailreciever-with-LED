@@ -14,7 +14,6 @@ GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(GREEN_LED, GPIO.OUT)
 GPIO.setup(RED_LED, GPIO.OUT)
-pygame.mixer.init(48000, -16, 1, 1024)
 
 # Deze loop haalt om de zoveel tijd bij of er mailtjes binnen komen.
 def loop():
@@ -34,10 +33,14 @@ def loop():
 
     if countemails > NEWMAIL_OFFSET:
         GPIO.output(RED_LED, False)
-        GPIO.output(GREEN_LED,True)
         pygame.mixer.init()
         pygame.mixer.music.load("sounds/victory-sound.mp3")
         pygame.mixer.music.play()
+        for i in range(0 , 101):
+            GPIO.output(GREEN_LED, True)
+            time.sleep(0.15)
+            GPIO.output(GREEN_LED, False)
+            time.sleep(0.15)
         while pygame.mixer.music.get_busy() == True:
             continue
 
