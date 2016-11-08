@@ -9,11 +9,13 @@ import RPi.GPIO as GPIO
 
 DEBUG = True
 
+# Stuurt de GPIO voor de lampjes aan.
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(GREEN_LED, GPIO.OUT)
 GPIO.setup(RED_LED, GPIO.OUT)
 
+# Deze loop haalt om de zoveel tijd bij of er mailtjes binnen komen.
 def loop():
     server = IMAPClient(HOSTNAME, use_uid=True, ssl=True)
     server.login(USERNAME, PASSWORD)
@@ -33,7 +35,7 @@ def loop():
         GPIO.output(GREEN_LED, True)
         GPIO.output(RED_LED, False)
         pygame.mixer.init()
-        pygame.mixer.music.load("sounds/ns.mp3")
+        pygame.mixer.music.load("sounds/victory-sound.mp3")
         pygame.mixer.music.play()
         while pygame.mixer.music.get_busy() == True:
             continue
@@ -46,6 +48,7 @@ def loop():
 print
 'Press Ctrl-C to quit.'
 
+# roept de main loop aan van de applicatie
 while True:
     loop()
 
