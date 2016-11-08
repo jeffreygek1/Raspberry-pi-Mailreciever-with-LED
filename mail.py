@@ -23,9 +23,6 @@ def loop():
 
     folder_status = server.folder_status(MAILBOX, 'UNSEEN')
 
-    print
-    server.folder_status(SPAMBOX, 'ALL')
-
     countemails = int(folder_status['UNSEEN'])
 
     print
