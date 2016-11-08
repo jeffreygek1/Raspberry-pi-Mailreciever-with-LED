@@ -35,7 +35,7 @@ def loop():
         GPIO.output(GREEN_LED, True)
         GPIO.output(RED_LED, False)
         pygame.mixer.init()
-        pygame.mixer.music.load("sounds/ns.mp3")
+        pygame.mixer.music.load("sounds/victory-sound.mp3")
         pygame.mixer.music.play()
         while pygame.mixer.music.get_busy() == True:
             continue
