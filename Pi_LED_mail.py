@@ -27,6 +27,7 @@ def loop():
     print
     "You have", countemails, "new emails!"
     def Mailrecieved():
+        countemails = int(folder_status['UNSEEN'])
         if countemails == 0:
             return 0
         else:
