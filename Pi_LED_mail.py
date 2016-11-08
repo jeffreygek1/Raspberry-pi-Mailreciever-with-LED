@@ -14,6 +14,7 @@ GPIO.setup(GREEN_LED, GPIO.OUT)
 GPIO.setup(RED_LED, GPIO.OUT)
 
 def loop():
+    MAIL_CHECK_FREQ = 15
     server = IMAPClient(HOSTNAME, use_uid=True, ssl=True)
     server.login(USERNAME, PASSWORD)
 
@@ -26,21 +27,16 @@ def loop():
 
     print
     "You have", countemails, "new emails!"
-    def Mailrecieved():
-        countemails = int(folder_status['UNSEEN'])
-        if countemails == 0:
-            return 0
-        else:
-            return 1
 
     if countemails > NEWMAIL_OFFSET:
-        while True:
+        GPIO.output(RED_LED, False)
+        for i in range(0 , 101):
             GPIO.output(GREEN_LED, True)
             time.sleep(0.15)
             GPIO.output(GREEN_LED, False)
             time.sleep(0.15)
-            if Mailrecieved() == 0:
-                break
+        MAIL_CHECK_FREQ = 0
+
     else:
         GPIO.output(GREEN_LED, False)
         GPIO.output(RED_LED, True)
