@@ -32,6 +32,11 @@ def loop():
     if countemails > NEWMAIL_OFFSET:
         GPIO.output(GREEN_LED, True)
         GPIO.output(RED_LED, False)
+        pygame.mixer.init()
+        pygame.mixer.music.load("sounds/ns.mp3")
+        pygame.mixer.music.play()
+        while pygame.mixer.music.get_busy() == True:
+            continue
     else:
         GPIO.output(GREEN_LED, False)
         GPIO.output(RED_LED, True)
