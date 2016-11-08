@@ -14,6 +14,7 @@ GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(GREEN_LED, GPIO.OUT)
 GPIO.setup(RED_LED, GPIO.OUT)
+pygame.mixer.init(48000, -16, 1, 1024)
 
 # Deze loop haalt om de zoveel tijd bij of er mailtjes binnen komen.
 def loop():
