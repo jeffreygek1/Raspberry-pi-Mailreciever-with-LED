@@ -26,6 +26,11 @@ def loop():
 
     print
     "You have", countemails, "new emails!"
+    def Mailrecieved():
+        if countemails == 0:
+            return 0
+        else:
+            return 1
 
     if countemails > NEWMAIL_OFFSET:
         while True:
@@ -33,6 +38,8 @@ def loop():
             time.sleep(0.15)
             GPIO.output(GREEN_LED, False)
             time.sleep(0.15)
+            if Mailrecieved() == 0:
+                break
     else:
         GPIO.output(GREEN_LED, False)
         GPIO.output(RED_LED, True)
