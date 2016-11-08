@@ -43,9 +43,9 @@ def loop():
         GPIO.output(RED_LED, False)
         while True:
             GPIO.output(GREEN_LED, True)
-            time.sleep(0.2)
+            time.sleep(0.15)
             GPIO.output(GREEN_LED, False)
-            time.sleep(0.2)
+            time.sleep(0.15)
     else:
         GPIO.output(GREEN_LED, False)
         GPIO.output(RED_LED, True)
