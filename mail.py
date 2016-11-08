@@ -1,3 +1,4 @@
+
 import pygame
 from imapclient import IMAPClient
 from config import *
@@ -45,4 +46,3 @@ while True:
     loop()
 
 GPIO.cleanup()
-
