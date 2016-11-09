@@ -1,11 +1,11 @@
 HOSTNAME = 'imap.gmail.com'
 USERNAME = 'hogeschoolutrechtmail'
 PASSWORD = 'raspberry'
-MAILBOX = 'Inbox'
-SPAMBOX = 'Spam'
+MAILBOX = 'inbox'
 
-NEWMAIL_OFFSET = 0
-MAIL_CHECK_FREQ = 15
+CSV_PATH = "data/emails.csv"
+
+REFRESHTIME = 5
 
 YELLOW_LED = 18
 RED_LED = 23
