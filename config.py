@@ -9,3 +9,5 @@ MAIL_CHECK_FREQ = 15
 
 YELLOW_LED = 18
 RED_LED = 23
+BUTTON_mute = 21
+BUTTON_unmute = 24
