@@ -51,6 +51,7 @@ def loop():
             GPIO.output(YELLOW_LED, False)
             time.sleep(0.15)
             if played == 0:
+                GPIO.output(YELLOW_LED, True)
                 pygame.mixer.init()
                 pygame.mixer.music.load("sounds/victory-sound.mp3")
                 pygame.mixer.music.play()
