@@ -38,8 +38,7 @@ def loop():
 
     countemails = int(folder_status['UNSEEN'])
 
-    print
-    "You have", countemails, "new emails!"
+    print("You have", countemails, "new emails!")
     print(countemails)
     print(NEWMAIL_OFFSET)
 
@@ -72,8 +71,7 @@ def loop():
     time.sleep(MAIL_CHECK_FREQ)
 
 try:
-    print
-    'Press Ctrl-C to quit.'
+    print('Press Ctrl-C to quit.')
     while True:
         loop()
 
