@@ -38,7 +38,6 @@ def CSVschrijven(CSVbestand, afzender, tijd):
 
         print(csv_dictEmails)
 
-
         while True:
             # schrijft in de csv, als de afzender niet bestaat
             if not any(email['afzender'] == afzender for email in csv_dictEmails):
@@ -47,7 +46,7 @@ def CSVschrijven(CSVbestand, afzender, tijd):
                 break
 
             # schrijft in de csv, als de afzender al bestaat, maar de tijd anders is
-            elif any(email['afzender'] == afzender for email in csv_dictEmails):
+            else:
                 print('afzender true')
                 if not any(email['tijd'] == tijd for email in csv_dictEmails):
                     schrijven('data/emails.csv', afzender, tijd)
