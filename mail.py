@@ -51,7 +51,7 @@ def loop():
 
     if countemails > NEWMAIL_OFFSET:
         GPIO.output(RED_LED, False)
-        for i in range(0, 101):
+        for i in range(0, 20):
             GPIO.output(YELLOW_LED, True)
             time.sleep(0.15)
             GPIO.output(YELLOW_LED, False)
@@ -72,7 +72,7 @@ def loop():
         GPIO.output(YELLOW_LED, False)
         GPIO.output(RED_LED, True)
 
-        MAIL_CHECK_FREQ = 15
+        MAIL_CHECK_FREQ = 5
         isplayed(1)
 
     time.sleep(MAIL_CHECK_FREQ)
