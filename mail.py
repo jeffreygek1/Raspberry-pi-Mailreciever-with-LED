@@ -39,6 +39,8 @@ def loop():
 
     if countemails > NEWMAIL_OFFSET:
         GPIO.output(RED_LED, False)
+        global MAIL_CHECK_FREQ
+        MAIL_CHECK_FREQ = 0
         for i in range(0 , 101):
             GPIO.output(YELLOW_LED, True)
             time.sleep(0.15)
@@ -51,7 +53,7 @@ def loop():
                 isplayed()
             while pygame.mixer.music.get_busy() == True:
                 continue
-        MAIL_CHECK_FREQ = 0
+
 
     else:
         GPIO.output(YELLOW_LED, False)
