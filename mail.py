@@ -53,7 +53,7 @@ def loop():
             time.sleep(0.15)
             GPIO.output(YELLOW_LED, False)
             time.sleep(0.15)
-            if GPIO.input(BUTTON_mute) == False:
+            if GPIO.input(BUTTON_mute) == True:
                 print("mute")
                 os.system("amixer set PCM -- 0%")
             if GPIO.input(BUTTON_unmute) == False:
