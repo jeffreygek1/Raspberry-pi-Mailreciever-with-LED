@@ -16,9 +16,9 @@ GPIO.setup(YELLOW_LED, GPIO.OUT)
 GPIO.setup(RED_LED, GPIO.OUT)
 played = 0
 def isplayed():
-    if played== 0:
+    if played == 0:
         global played
-        played=1
+        played = 1
         return played
 
 # Deze loop haalt om de zoveel tijd bij of er mailtjes binnen komen.
@@ -39,9 +39,7 @@ def loop():
 
     if countemails > NEWMAIL_OFFSET:
         GPIO.output(RED_LED, False)
-        global MAIL_CHECK_FREQ
-        MAIL_CHECK_FREQ = 0
-        for i in range(0 , 101):
+        for i in range(0, 101):
             GPIO.output(YELLOW_LED, True)
             time.sleep(0.15)
             GPIO.output(YELLOW_LED, False)
