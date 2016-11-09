@@ -12,8 +12,7 @@ import csv
 # M.logout()
 
 # lees de header van de afzender (Stefan)
-
-#de 'afzender', de 'tijd' en de 'Message ID' uitlezen
+# - de 'afzender', de 'tijd' en de 'Message ID' uitlezen
 def leesHeader():
 
 
@@ -22,38 +21,44 @@ def leesHeader():
 leesHeader()
 
 # functie voor het schrijven naar het CSV bestand. Wordt later aangeroepen
-def schrijven(CSVbestand, afzender, tijd, messageID):
+def schrijven(CSVbestand, afzender, tijd):
     with open(CSVbestand, 'a', newline='') as CSVbestand:
         CSVSchrijven = csv.writer(CSVbestand, delimiter=',')
-        CSVSchrijven.writerow((afzender, tijd, messageID))
+        CSVSchrijven.writerow((afzender, tijd))
 
     return
 
-def CSVschrijven(CSVbestand, afzender, tijd, messageID):
+def CSVschrijven(CSVbestand, afzender, tijd):
 
     # leest het csv bestand en schrijft in het CSV bestand
-    # tempDict = {}
     with open(CSVbestand, 'r', newline='') as CSVbestand:
         CSVlezen = csv.DictReader(CSVbestand)
-        for regel in CSVlezen:
-            values = regel.values()
+        # stopt alle regels uit csv in een lijst met dictionaries
+        csv_dictEmails = list(CSVlezen)
 
-        if not messageID == regel.values():
-            print(messageID)
-            schrijven('data/emails.csv', afzender, tijd, messageID)
-
-        # for i in regel.values():
-        #     if messageID == i:
-        #         print(i)
-        #         print(messageID)
-        #         schrijven('data/emails.csv', afzender, tijd, messageID)
-        #         break
+        print(csv_dictEmails)
 
 
-    return # voor de sier
+        while True:
+            # schrijft in de csv, als de afzender niet bestaat
+            if not any(email['afzender'] == afzender for email in csv_dictEmails):
+                print('afzender false')
+                schrijven('data/emails.csv', afzender, tijd)
+                break
+
+            # schrijft in de csv, als de afzender al bestaat, maar de tijd anders is
+            elif any(email['afzender'] == afzender for email in csv_dictEmails):
+                print('afzender true')
+                if not any(email['tijd'] == tijd for email in csv_dictEmails):
+                    schrijven('data/emails.csv', afzender, tijd)
+                    print('tijd false')
+                else:
+                    print('afzender true, tijd true')
+                break
+
+    return
 
 Afzender = 'blub'
-Tijd = '124113'
-MessageID = 'uhw4n0t87gon75hmgevnob56uytwhgyu5hmoevn5tirujfcmgvy56kufo84vyc 4v6iyfcmnrvdtgf'
+Tijd = '17:05:00'
 
-CSVschrijven('data/emails.csv', Afzender, Tijd, MessageID)
+CSVschrijven('data/emails.csv', Afzender, Tijd)
