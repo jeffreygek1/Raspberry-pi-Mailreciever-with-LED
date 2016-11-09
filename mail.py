@@ -30,9 +30,9 @@ def isplayed(r):
 
 # Deze loop haalt om de zoveel tijd bij of er mailtjes binnen komen.
 def loop():
-    if GPIO.input(BUTTON_mute) == True:
+    if GPIO.input(BUTTON_mute) == False:
         os.system("amixer set PCM -- 0%")
-    if GPIO.input(BUTTON_unmute) == True:
+    if GPIO.input(BUTTON_unmute) == False:
         os.system("amixer set PCM -- 100%")
 
     server = IMAPClient(HOSTNAME, use_uid=True, ssl=True)
