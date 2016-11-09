@@ -31,7 +31,7 @@ def isplayed(r):
 # Deze loop haalt om de zoveel tijd bij of er mailtjes binnen komen.
 def loop():
     if GPIO.input(BUTTON_mute) == False:
-        subprocess.call("amixer set PCM -- 0%")
+        subprocess.call("amixer set PCM -- 1%")
     if GPIO.input(BUTTON_unmute) == False:
         subprocess.call("amixer set PCM -- 100%")
 
