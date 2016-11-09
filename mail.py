@@ -4,7 +4,7 @@ from imapclient import IMAPClient
 from config import *
 import time
 import RPi.GPIO as GPIO
-import subprocess
+import os
 
 # !/usr/bin/env python
 
@@ -30,10 +30,10 @@ def isplayed(r):
 
 # Deze loop haalt om de zoveel tijd bij of er mailtjes binnen komen.
 def loop():
-    if GPIO.input(BUTTON_mute) == False:
-        subprocess.run("/usr/bin/amixer -q -c 0 sset 'PCM',0 mute")
-    if GPIO.input(BUTTON_unmute) == False:
-        subprocess.run("/usr/bin/amixer -q -c 0 sset 'PCM',0 unmute")
+    if GPIO.input(BUTTON_mute) == True:
+        os.system("amixer set PCM -- 0%")
+    if GPIO.input(BUTTON_unmute) == True:
+        os.system("amixer set PCM -- 100%")
 
     server = IMAPClient(HOSTNAME, use_uid=True, ssl=True)
     server.login(USERNAME, PASSWORD)
