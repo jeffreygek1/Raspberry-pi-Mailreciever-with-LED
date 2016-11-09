@@ -1,3 +1,4 @@
+
 import pygame
 from imapclient import IMAPClient
 from config import *
@@ -8,11 +9,13 @@ import RPi.GPIO as GPIO
 
 DEBUG = True
 
+# Stuurt de GPIO voor de lampjes aan.
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(GREEN_LED, GPIO.OUT)
 GPIO.setup(RED_LED, GPIO.OUT)
 
+# Deze loop haalt om de zoveel tijd bij of er mailtjes binnen komen.
 def loop():
     server = IMAPClient(HOSTNAME, use_uid=True, ssl=True)
     server.login(USERNAME, PASSWORD)
@@ -22,31 +25,30 @@ def loop():
     print('%d messages in INBOX' % select_info['EXISTS'])
 
     folder_status = server.folder_status(MAILBOX, 'UNSEEN')
+
     countemails = int(folder_status['UNSEEN'])
 
     print
     "You have", countemails, "new emails!"
-    def Mailrecieved():
-        countemails = int(folder_status['UNSEEN'])
-        if countemails == 0:
-            return 0
-        else:
-            return 1
 
     if countemails > NEWMAIL_OFFSET:
-        while True:
+        GPIO.output(RED_LED, False)
+        pygame.mixer.init()
+        pygame.mixer.music.load("sounds/victory-sound.mp3")
+        pygame.mixer.music.play()
+        for i in range(0 , 101):
             GPIO.output(GREEN_LED, True)
             time.sleep(0.15)
             GPIO.output(GREEN_LED, False)
             time.sleep(0.15)
-            if Mailrecieved() == 0:
-                break
+            while pygame.mixer.music.get_busy() == True:
+                continue
+        MAIL_CHECK_FREQ = 0
     else:
         GPIO.output(GREEN_LED, False)
         GPIO.output(RED_LED, True)
 
     time.sleep(MAIL_CHECK_FREQ)
-
 
 try:
     print
@@ -56,4 +58,3 @@ try:
 
 finally:
     GPIO.cleanup()
-
