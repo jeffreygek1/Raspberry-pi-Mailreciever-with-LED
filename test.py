@@ -32,6 +32,7 @@ def schrijven(CSVbestand, afzender, tijd, messageID):
 def CSVschrijven(CSVbestand, afzender, tijd, messageID):
 
     # leest het csv bestand en schrijft in het CSV bestand
+    # tempDict = {}
     with open(CSVbestand, 'r', newline='') as CSVbestand:
         CSVlezen = csv.DictReader(CSVbestand)
         for regel in CSVlezen:
@@ -41,6 +42,12 @@ def CSVschrijven(CSVbestand, afzender, tijd, messageID):
             print(messageID)
             schrijven('data/emails.csv', afzender, tijd, messageID)
 
+        # for i in regel.values():
+        #     if messageID == i:
+        #         print(i)
+        #         print(messageID)
+        #         schrijven('data/emails.csv', afzender, tijd, messageID)
+        #         break
 
 
     return # voor de sier
