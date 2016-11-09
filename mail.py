@@ -4,6 +4,7 @@ from imapclient import IMAPClient
 from config import *
 import time
 import RPi.GPIO as GPIO
+import subprocess
 
 # !/usr/bin/env python
 
@@ -14,6 +15,8 @@ GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(YELLOW_LED, GPIO.OUT)
 GPIO.setup(RED_LED, GPIO.OUT)
+GPIO.setup(BUTTON_mute, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(BUTTON_unmute, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 played = 0
 def isplayed(r):
     if r == 0:
@@ -27,9 +30,13 @@ def isplayed(r):
 
 # Deze loop haalt om de zoveel tijd bij of er mailtjes binnen komen.
 def loop():
+    if GPIO.input(BUTTON_mute) == False:
+        subprocess.call("amixer set PCM -- 0%")
+    if GPIO.input(BUTTON_unmute) == False:
+        subprocess.call("amixer set PCM -- 100%")
+
     server = IMAPClient(HOSTNAME, use_uid=True, ssl=True)
     server.login(USERNAME, PASSWORD)
-
     print('Logging in as ' + USERNAME)
     select_info = server.select_folder(MAILBOX)
     print('%d messages in INBOX' % select_info['EXISTS'])
