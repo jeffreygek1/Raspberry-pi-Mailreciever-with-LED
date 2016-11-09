@@ -30,12 +30,7 @@ def isplayed(r):
 
 # Deze loop haalt om de zoveel tijd bij of er mailtjes binnen komen.
 def loop():
-    if GPIO.input(BUTTON_mute) == True:
-        print("mute")
-        os.system("amixer set PCM -- 0%")
-    if GPIO.input(BUTTON_unmute) == True:
-        print("unmute")
-        os.system("amixer set PCM -- 100%")
+
 
     server = IMAPClient(HOSTNAME, use_uid=True, ssl=True)
     server.login(USERNAME, PASSWORD)
@@ -58,6 +53,12 @@ def loop():
             time.sleep(0.15)
             GPIO.output(YELLOW_LED, False)
             time.sleep(0.15)
+            if GPIO.input(BUTTON_mute) == True:
+                print("mute")
+                os.system("amixer set PCM -- 0%")
+            if GPIO.input(BUTTON_unmute) == True:
+                print("unmute")
+                os.system("amixer set PCM -- 100%")
             if played == 0:
                 GPIO.output(YELLOW_LED, True)
                 pygame.mixer.init()
