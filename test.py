@@ -50,14 +50,14 @@ def CSVschrijven(afzender, tijd):
         # schrijft in de csv, als de afzender niet bestaat
         if not any(email['afzender'] == afzender for email in csv_dictEmails):
             #print('afzender false')
-            schrijven('data/emails.csv', afzender, tijd)
+            schrijven(afzender, tijd)
             nieuweEmail()
 
         # schrijft in de csv, als de afzender al bestaat, maar de tijd anders is
         else:
             #print('afzender true')
             if not any(email['tijd'] == tijd for email in csv_dictEmails):
-                schrijven('data/emails.csv', afzender, tijd)
+                schrijven(afzender, tijd)
                 nieuweEmail()
                 #print('tijd false')
             #else:
