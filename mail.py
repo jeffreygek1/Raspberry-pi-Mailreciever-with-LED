@@ -49,14 +49,16 @@ def loop():
                 pygame.mixer.music.load("sounds/victory-sound.mp3")
                 pygame.mixer.music.play()
                 isplayed()
-            MAIL_CHECK_FREQ = 0
+
             while pygame.mixer.music.get_busy() == True:
                 continue
+        MAIL_CHECK_FREQ = 0
 
 
     else:
         GPIO.output(YELLOW_LED, False)
         GPIO.output(RED_LED, True)
+        MAIL_CHECK_FREQ = 15
 
     time.sleep(MAIL_CHECK_FREQ)
 
