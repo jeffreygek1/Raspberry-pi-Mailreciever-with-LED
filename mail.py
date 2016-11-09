@@ -12,7 +12,7 @@ DEBUG = True
 # Stuurt de GPIO voor de lampjes aan.
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(GREEN_LED, GPIO.OUT)
+GPIO.setup(YELLOW_LED, GPIO.OUT)
 GPIO.setup(RED_LED, GPIO.OUT)
 played = 0
 def isplayed():
@@ -40,9 +40,9 @@ def loop():
     if countemails > NEWMAIL_OFFSET:
         GPIO.output(RED_LED, False)
         for i in range(0 , 101):
-            GPIO.output(GREEN_LED, True)
+            GPIO.output(YELLOW_LED, True)
             time.sleep(0.15)
-            GPIO.output(GREEN_LED, False)
+            GPIO.output(YELLOW_LED, False)
             time.sleep(0.15)
             if played == 0:
                 pygame.mixer.init()
@@ -54,7 +54,7 @@ def loop():
         MAIL_CHECK_FREQ = 0
 
     else:
-        GPIO.output(GREEN_LED, False)
+        GPIO.output(YELLOW_LED, False)
         GPIO.output(RED_LED, True)
 
     time.sleep(MAIL_CHECK_FREQ)
