@@ -37,7 +37,7 @@ def loop():
     print
     "You have", countemails, "new emails!"
 
-    if countemails > NEWMAIL_OFFSET:
+    if True:
         GPIO.output(RED_LED, False)
         for i in range(0, 101):
             GPIO.output(YELLOW_LED, True)
