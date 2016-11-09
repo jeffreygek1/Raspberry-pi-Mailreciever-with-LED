@@ -5,7 +5,7 @@ from config import *
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(YELLOW_LED, GPIO.OUT)
-GPIO.setup(BUTTON_mute, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(BUTTON_mute, GPIO.IN)
 
 while True:
 	if GPIO.input(BUTTON_mute):
