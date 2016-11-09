@@ -37,7 +37,7 @@ def loop():
     print
     "You have", countemails, "new emails!"
 
-    if True:
+    if countemails > NEWMAIL_OFFSET:
         GPIO.output(RED_LED, False)
         for i in range(0, 101):
             GPIO.output(YELLOW_LED, True)
@@ -49,6 +49,7 @@ def loop():
                 pygame.mixer.music.load("sounds/victory-sound.mp3")
                 pygame.mixer.music.play()
                 isplayed()
+            MAIL_CHECK_FREQ = 0
             while pygame.mixer.music.get_busy() == True:
                 continue
 
