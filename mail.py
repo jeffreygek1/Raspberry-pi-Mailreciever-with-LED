@@ -106,6 +106,9 @@ def veranderLicht(a):
             time.sleep(1)
         GPIO.output(YELLOW_LED, True)
     else:
+        pygame.mixer.init()
+        pygame.mixer.music.load("sounds/xp-error.mp3")
+        pygame.mixer.music.play()
         GPIO.output(YELLOW_LED, False)
         GPIO.output(RED_LED, True)
 
