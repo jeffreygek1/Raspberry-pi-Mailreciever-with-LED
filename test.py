@@ -74,16 +74,16 @@ def csvCheck(afzender, tijd, aantal_mails):
         if not any(email['afzender'] == afzender for email in csv_dictEmails):
             #print('afzender false')
             schrijven(afzender, tijd)
-            veranderLicht(aantal_mails)
             nieuweEmail()
+            veranderLicht(aantal_mails)
 
         # schrijft in de csv, als de afzender al bestaat, maar de tijd anders is
         else:
             #print('afzender true')
             if not any(email['tijd'] == tijd for email in csv_dictEmails):
                 schrijven(afzender, tijd)
-                veranderLicht(aantal_mails)
                 nieuweEmail()
+                veranderLicht(aantal_mails)
 
     return
 
