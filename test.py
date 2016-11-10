@@ -41,7 +41,8 @@ def haalHeader():
             msg = parser.parsestr(mail[1][0][1].decode("utf-8"))
 
             # Roep csvCheck aan met de afzender en datum/tijd
-            csvCheck(msg["From"], msg["Date"], aantal_mails)
+            if csvCheck(msg["From"], msg["Date"], aantal_mails):
+                break
     else:
         print("Er is iets fout gegaan met het ophalen van de emails: "+typ)
 
@@ -76,6 +77,7 @@ def csvCheck(afzender, tijd, aantal_mails):
             schrijven(afzender, tijd)
             nieuweEmail()
             veranderLicht(aantal_mails)
+            return 1
 
         # schrijft in de csv, als de afzender al bestaat, maar de tijd anders is
         else:
@@ -84,8 +86,9 @@ def csvCheck(afzender, tijd, aantal_mails):
                 schrijven(afzender, tijd)
                 nieuweEmail()
                 veranderLicht(aantal_mails)
+                return 1
 
-    return
+    return 0
 
 # Wordt aangeroepen op het moment dat er een nieuwe email binnen komt
 def nieuweEmail():
