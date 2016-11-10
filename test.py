@@ -99,7 +99,7 @@ def nieuweEmail():
 def veranderLicht(a):
     if a > 0:
         GPIO.output(RED_LED, False)
-        for i in range(0, a+1):
+        for i in range(0, a):
             GPIO.output(YELLOW_LED, True)
             time.sleep(1)
             GPIO.output(YELLOW_LED, False)
