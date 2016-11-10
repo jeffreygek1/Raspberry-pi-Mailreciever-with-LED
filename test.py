@@ -4,6 +4,8 @@ import time
 from email.parser import HeaderParser
 from config import *
 import pygame
+import GPIO
+import os
 
 # lees de header van de afzender
 # - de 'afzender' en de 'tijd' uitlezen
@@ -75,10 +77,21 @@ def csvCheck(afzender, tijd):
 def nieuweEmail():
 
     print("Nieuwe email ontvangen!")
-
+    GPIO.output(YELLOW_LED, True)
     pygame.mixer.init()
     pygame.mixer.music.load("sounds/victory-sound.mp3")
     pygame.mixer.music.play()
+    for i in range(0, 20):
+        GPIO.output(YELLOW_LED, True)
+        time.sleep(0.15)
+        GPIO.output(YELLOW_LED, False)
+        time.sleep(0.15)
+        if GPIO.input(BUTTON_mute) == True:
+            print("mute")
+            os.system("amixer set PCM -- 0%")
+        if GPIO.input(BUTTON_unmute) == True:
+            print("unmute")
+            os.system("amixer set PCM -- 100%")
 
     return
 
