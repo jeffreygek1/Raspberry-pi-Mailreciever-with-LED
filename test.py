@@ -87,7 +87,7 @@ def nieuweEmail():
     pygame.mixer.init()
     pygame.mixer.music.load("sounds/victory-sound.mp3")
     pygame.mixer.music.play()
-    for i in range(0, 20):
+    for i in range(0, 50):
         GPIO.output(YELLOW_LED, True)
         time.sleep(0.15)
         GPIO.output(YELLOW_LED, False)
