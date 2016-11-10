@@ -29,7 +29,10 @@ def haalHeader():
     # Check of de verbinding is gelukt
     if typ == "OK":
 
-        veranderLicht(len(data[0].split()))
+        aantal_mails = len(data[0].split())
+
+        if aantal_mails == 0:
+            veranderLicht(aantal_mails)
 
         for num in data[0].split():
             mail = mailserver.fetch(num, '(BODY[HEADER])')
@@ -38,7 +41,7 @@ def haalHeader():
             msg = parser.parsestr(mail[1][0][1].decode("utf-8"))
 
             # Roep csvCheck aan met de afzender en datum/tijd
-            csvCheck(msg["From"], msg["Date"])
+            csvCheck(msg["From"], msg["Date"], aantal_mails)
     else:
         print("Er is iets fout gegaan met het ophalen van de emails: "+typ)
 
@@ -59,7 +62,7 @@ def schrijven(afzender, tijd):
     return
 
 # Check of de email al bestaat in het CSV bestand
-def csvCheck(afzender, tijd):
+def csvCheck(afzender, tijd, aantal_mails):
 
     # leest het csv bestand en schrijft in het CSV bestand
     with open(CSV_PATH, 'r', newline='') as CSVbestand:
@@ -71,6 +74,7 @@ def csvCheck(afzender, tijd):
         if not any(email['afzender'] == afzender for email in csv_dictEmails):
             #print('afzender false')
             schrijven(afzender, tijd)
+            veranderLicht(aantal_mails)
             nieuweEmail()
 
         # schrijft in de csv, als de afzender al bestaat, maar de tijd anders is
@@ -78,6 +82,7 @@ def csvCheck(afzender, tijd):
             #print('afzender true')
             if not any(email['tijd'] == tijd for email in csv_dictEmails):
                 schrijven(afzender, tijd)
+                veranderLicht(aantal_mails)
                 nieuweEmail()
 
     return
