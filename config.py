@@ -5,7 +5,7 @@ MAILBOX = 'inbox'
 
 CSV_PATH = "data/emails.csv"
 
-REFRESHTIME = 0.1
+REFRESHTIME = 1
 
 YELLOW_LED = 18
 RED_LED = 23
