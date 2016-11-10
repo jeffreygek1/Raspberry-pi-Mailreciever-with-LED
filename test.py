@@ -7,6 +7,12 @@ import pygame
 import RPi.GPIO as GPIO
 import os
 
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(YELLOW_LED, GPIO.OUT)
+GPIO.setup(RED_LED, GPIO.OUT)
+GPIO.setup(BUTTON_mute, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(BUTTON_unmute, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 # lees de header van de afzender
 # - de 'afzender' en de 'tijd' uitlezen
 def leesHeader():
