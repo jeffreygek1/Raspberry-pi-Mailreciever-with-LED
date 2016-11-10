@@ -121,18 +121,19 @@ def mute():
 
 # Mainloop van het programma
 def mainLoop():
+    try:
+        print("Druk op CTRL+C om te stoppen!")
 
-    print("Druk op CTRL+C om te stoppen!")
+        while 1:
+            mute()
 
-    while 1:
-        mute()
+            haalHeader()
 
-        haalHeader()
+            time.sleep(REFRESHTIME)
 
-        time.sleep(REFRESHTIME)
-
-    return
-
+        return
+    finally:
+        GPIO.cleanup()
 
 # Start de mainloop
 
