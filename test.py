@@ -13,9 +13,10 @@ GPIO.setup(YELLOW_LED, GPIO.OUT)
 GPIO.setup(RED_LED, GPIO.OUT)
 GPIO.setup(BUTTON_mute, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(BUTTON_unmute, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
 # lees de header van de afzender
 # - de 'afzender' en de 'tijd' uitlezen
-def leesHeader():
+def haalHeader():
 
     # Maak de verbinding met de mail server
     mailserver = imaplib.IMAP4_SSL(HOSTNAME)
@@ -27,6 +28,8 @@ def leesHeader():
 
     # Check of de verbinding is gelukt
     if typ == "OK":
+
+        veranderLicht(len(data[0].split()))
 
         for num in data[0].split():
             mail = mailserver.fetch(num, '(BODY[HEADER])')
@@ -83,22 +86,32 @@ def csvCheck(afzender, tijd):
 def nieuweEmail():
 
     print("Nieuwe email ontvangen!")
-    GPIO.output(YELLOW_LED, True)
     pygame.mixer.init()
     pygame.mixer.music.load("sounds/victory-sound.mp3")
     pygame.mixer.music.play()
-    for i in range(0, 50):
-        GPIO.output(YELLOW_LED, True)
-        time.sleep(0.15)
-        GPIO.output(YELLOW_LED, False)
-        time.sleep(0.15)
-        if GPIO.input(BUTTON_mute) == True:
-            print("mute")
-            os.system("amixer set PCM -- 0%")
-        if GPIO.input(BUTTON_unmute) == True:
-            print("unmute")
-            os.system("amixer set PCM -- 100%")
+    return
 
+def veranderLicht(a):
+    if a > 0:
+        GPIO.output(RED_LED, False)
+        for i in range(0, a+1):
+            GPIO.output(YELLOW_LED, True)
+            time.sleep(1)
+            GPIO.output(YELLOW_LED, False)
+            time.sleep(1)
+        GPIO.output(YELLOW_LED, True)
+    else:
+        GPIO.output(YELLOW_LED, False)
+        GPIO.output(RED_LED, True)
+
+    return
+def mute():
+    if GPIO.input(BUTTON_mute) == True:
+        print("mute")
+        os.system("amixer set PCM -- 0%")
+    if GPIO.input(BUTTON_unmute) == True:
+        print("unmute")
+        os.system("amixer set PCM -- 100%")
     return
 
 # Mainloop van het programma
@@ -107,8 +120,9 @@ def mainLoop():
     print("Druk op CTRL+C om te stoppen!")
 
     while 1:
+        mute()
 
-        leesHeader()
+        haalHeader()
 
         time.sleep(REFRESHTIME)
 
@@ -116,4 +130,6 @@ def mainLoop():
 
 
 # Start de mainloop
+
+
 mainLoop()
