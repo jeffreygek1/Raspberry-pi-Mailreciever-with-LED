@@ -41,7 +41,7 @@ def haalHeader():
             msg = parser.parsestr(mail[1][0][1].decode("utf-8"))
 
             # Roep csvCheck aan met de afzender en datum/tijd
-            csvCheck(msg["From"], msg["Date"], aantal_mails, gevonden)
+            csvCheck(msg["From"], msg["Date"], aantal_mails)
     else:
         print("Er is iets fout gegaan met het ophalen van de emails: "+typ)
 
