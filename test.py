@@ -4,7 +4,7 @@ import time
 from email.parser import HeaderParser
 from config import *
 import pygame
-import GPIO
+import RPi.GPIO as GPIO
 import os
 
 # lees de header van de afzender
