@@ -3,6 +3,7 @@ import imaplib
 import time
 from email.parser import HeaderParser
 from config import *
+import pygame
 
 # lees de header van de afzender
 # - de 'afzender' en de 'tijd' uitlezen
@@ -74,6 +75,10 @@ def csvCheck(afzender, tijd):
 def nieuweEmail():
 
     print("Nieuwe email ontvangen!")
+
+    pygame.mixer.init()
+    pygame.mixer.music.load("sounds/victory-sound.mp3")
+    pygame.mixer.music.play()
 
     return
 
