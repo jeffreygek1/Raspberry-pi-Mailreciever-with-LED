@@ -14,6 +14,7 @@ GPIO.setup(RED_LED, GPIO.OUT)
 GPIO.setup(BUTTON_mute, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(BUTTON_unmute, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
+
 # lees de header van de afzender
 # - de 'afzender' en de 'tijd' uitlezen
 def haalHeader():
@@ -51,6 +52,7 @@ def haalHeader():
 
     return
 
+
 # functie voor het schrijven naar het CSV bestand. Wordt later aangeroepen
 def schrijven(afzender, tijd):
 
@@ -60,6 +62,7 @@ def schrijven(afzender, tijd):
         CSVSchrijven.writerow((afzender, tijd))
 
     return
+
 
 # Check of de email al bestaat in het CSV bestand
 def csvCheck(afzender, tijd, aantal_mails):
@@ -87,6 +90,7 @@ def csvCheck(afzender, tijd, aantal_mails):
 
     return
 
+
 # Wordt aangeroepen op het moment dat er een nieuwe email binnen komt
 def nieuweEmail():
 
@@ -95,6 +99,7 @@ def nieuweEmail():
     pygame.mixer.music.load("sounds/victory-sound.mp3")
     pygame.mixer.music.play()
     return
+
 
 def veranderLicht(a):
     if a > 0:
@@ -110,6 +115,8 @@ def veranderLicht(a):
         GPIO.output(RED_LED, True)
 
     return
+
+
 def mute():
     if GPIO.input(BUTTON_mute) == True:
         print("mute")
@@ -124,6 +131,8 @@ def mainLoop():
     try:
         print("Druk op CTRL+C om te stoppen!")
 
+        # Basis structuur van code komt van deze website:
+        # https://learn.adafruit.com/raspberry-pi-e-mail-notifier-using-leds/python-script
         while 1:
             mute()
 
@@ -131,11 +140,10 @@ def mainLoop():
 
             time.sleep(REFRESHTIME)
 
-        return
     finally:
         GPIO.cleanup()
 
+    return
+
 # Start de mainloop
-
-
 mainLoop()
